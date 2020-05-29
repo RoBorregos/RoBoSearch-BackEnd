@@ -31,6 +31,10 @@ func main() {
 		"/api/class/get-all-code/",
 		api_class.CreateGetAllCodeHandler("/api/class/get-all-code/"))
 
+	http.HandleFunc(
+		"/api/class/users/check-admin/",
+		api_class.CreateCheckIfAdminHandler("/api/class/users/check-admin/"))
+
 	fmt.Println("Started!")
 	log.Fatal(http.ListenAndServe(":8081", nil))
 }
