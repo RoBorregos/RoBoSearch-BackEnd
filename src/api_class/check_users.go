@@ -40,6 +40,10 @@ func checkIfAdminHandler(w http.ResponseWriter, r *http.Request, id string) {
 
 func CreateCheckIfAdminHandler(path string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*");
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type,Authorization");
+    w.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
+
 		id := r.URL.Path[len(path):]
 		if len(id) < 1 {
 			http.Error(w, "ID missing.", http.StatusBadRequest)

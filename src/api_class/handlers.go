@@ -53,6 +53,10 @@ func updateCodeHandler(w http.ResponseWriter, r *http.Request, id string) {
 
 func CreateUpdateCodeHandler(path string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*");
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type,Authorization");
+		w.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
+		
 		id := r.URL.Path[len(path):]
 		if len(id) < 1 {
 			http.Error(w, "ID missing.", http.StatusBadRequest)
@@ -94,6 +98,10 @@ func addCodeHandler(w http.ResponseWriter, r *http.Request) {
 
 func CreateAddCodeHandler(path string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*");
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type,Authorization");
+		w.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
+		
 		addCodeHandler(w, r)
 	}
 }
@@ -121,6 +129,10 @@ func deleteCodeHandler(w http.ResponseWriter, r *http.Request, id string) {
 
 func CreateDeleteCodeHandler(path string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*");
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type,Authorization");
+		w.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
+		
 		id := r.URL.Path[len(path):]
 		if len(id) < 1 {
 			http.Error(w, "ID missing.", http.StatusBadRequest)
@@ -157,6 +169,10 @@ func getCodeHandler(w http.ResponseWriter, r *http.Request, id string) {
 
 func CreateGetCodeHandler(path string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*");
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type,Authorization");
+		w.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
+		
 		id := r.URL.Path[len(path):]
 		if len(id) < 1 {
 			http.Error(w, "ID missing.", http.StatusBadRequest)
@@ -186,6 +202,10 @@ func getAllCodeHandler(w http.ResponseWriter, r *http.Request) {
 
 func CreateGetAllCodeHandler(path string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*");
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type,Authorization");
+    w.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
+
 		getAllCodeHandler(w, r)
 	}
 }
