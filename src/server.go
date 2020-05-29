@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"log"
 
 	api_class "./api_class"
@@ -10,7 +11,14 @@ import (
 
 func main() {
 	fmt.Println("Starting")
-	if _, err := api_class.InitConnection("mongodb://localhost/"); err != nil {
+
+	var DB string
+	if len(os.Getenv("DATABASE_URL")) > 0 {
+		DB = os.Getenv("DATABASE_URL")
+	} else {
+		DB = "mongodb://localhost/"
+	}
+	if _, err := api_class.InitConnection(DB); err != nil {
 		log.Fatal("Connection db failed: %s", err.Error())
 		return
 	}
@@ -36,5 +44,11 @@ func main() {
 		api_class.CreateCheckIfAdminHandler("/api/class/users/check-admin/"))
 
 	fmt.Println("Started!")
-	log.Fatal(http.ListenAndServe(":8081", nil))
+	var PORT string
+	if len(os.Getenv("PORT")) > 0 {
+		PORT = os.Getenv("PORT")
+	} else {
+		PORT = "8080"
+	}
+	log.Fatal(http.ListenAndServe(":" + PORT, nil))
 }
