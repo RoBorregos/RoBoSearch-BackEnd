@@ -165,3 +165,27 @@ func CreateGetCodeHandler(path string) http.HandlerFunc {
 		getCodeHandler(w, r, id)
 	}
 }
+
+func getAllCodeHandler(w http.ResponseWriter, r *http.Request) {
+	cursor, err := Database.Collection("codes").Find(
+		context.Background(), bson.D{})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	var results []Code
+	if err = cursor.All(context.Background(), &results); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(results)
+}
+
+func CreateGetAllCodeHandler(path string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		getAllCodeHandler(w, r)
+	}
+}

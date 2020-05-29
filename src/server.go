@@ -27,6 +27,9 @@ func main() {
 	http.HandleFunc(
 		"/api/class/add-code/",
 		api_class.CreateAddCodeHandler("/api/class/add-code/"))
+	http.HandleFunc(
+		"/api/class/get-all-code/",
+		api_class.CreateGetAllCodeHandler("/api/class/get-all-code/"))
 
 	fmt.Println("Started!")
 	log.Fatal(http.ListenAndServe(":8081", nil))
