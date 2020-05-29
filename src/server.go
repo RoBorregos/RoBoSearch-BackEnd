@@ -6,7 +6,7 @@ import (
 	"os"
 	"log"
 
-	api_class "./api_class"
+	api_class "github.com/RoBorregos/RoBoSearch-BackEnd/src/api_class"
 )
 
 func main() {
