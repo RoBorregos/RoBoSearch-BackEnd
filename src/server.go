@@ -1,12 +1,20 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"log"
+
 	api_class "./api_class"
 )
 
 func main() {
+	fmt.Println("Starting")
+	if _, err := api_class.InitConnection("mongodb://localhost/"); err != nil {
+		log.Fatal("Connection db failed: %s", err.Error())
+		return
+	}
+
 	http.HandleFunc(
 		"/api/class/get-code/",
 		api_class.CreateGetCodeHandler("/api/class/get-code/"))
@@ -20,5 +28,6 @@ func main() {
 		"/api/class/add-code/",
 		api_class.CreateAddCodeHandler("/api/class/add-code/"))
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	fmt.Println("Started!")
+	log.Fatal(http.ListenAndServe(":8081", nil))
 }
